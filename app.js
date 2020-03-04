@@ -9,13 +9,12 @@ const option = {
 $('form').on('submit', (e) => {
 	e.preventDefault();
 	const input = $('#input').val().trim();
-	console.log(input);
+	let newUrl;
 	params.q = input;
 	params.entity_id = 'san diego';
-	console.log(params);
-
-	const url = $.param(params);
-	console.log(url);
+	const searchParams = $.param(params);
+	newUrl = `${url}?${searchParams}`;
+	getData(newUrl, option);
 });
 
 //search for restaurants by name
@@ -23,8 +22,6 @@ const getData = (url, option) => {
 	fetch(url, option).then((res) => res.json()).then((resjson) => console.log(resjson));
 };
 
-function main (){
-	getData(url, option);
-}
+function main (){}
 
 $(main);
