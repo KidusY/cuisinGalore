@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo|Dancing+Script|Pacifico&display=swap');
+:root {
+	--font1: Pacifico, cursive;
+	--font2: Dancing Script, cursive;
+	--font3: Arvo, serif;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.hide {
+	display: none;
+}
+.landingPage {
+	width: 100%;
+}
+.landingPage h1 {
+	font-family: var(--font1);
+	text-align: center;
+}
+
+.landingPage .widgets {
+	font-family: var(--font3);
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.widgets div {
+	width: 30%;
+	height: 300px;
+	background-color: aliceblue;
+	cursor: pointer;
+	text-align: center;
+	padding: 100px;
+}
+.widgets div:hover {
+	transform: scale(1.1);
+}

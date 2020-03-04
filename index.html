@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
     <title>Search Nearby Restaurants</title>
 </head>
 
@@ -15,28 +15,47 @@
     </header>
 
     <main>
-        <div class="search">
+
+
+<!--------Landing page-------------------->
+<section class = "landingPage">
+
+    <h1>Cuisine Galore</h1>
+    <div class="widgets">
+        <div class ="widget1">
+           Search For Restaurants
+        </div>
+        <div class = "widget2">
+            Discover
+        </div>
+      
+    </div>
+
+    
+</section>
+
+        <section class="search hide">
             <h1>Discover</h1>
             <form>
                 <label for="citySearch"></label>
                 <input type="text" name="citySearch" placeholder="City" required>
                 <input type="submit" value="Search">
             </form>
-        </div>
+        </section>
 
-        <section class="results hide"></section>
+
         
-        <section class="searchRestaurant">
+        <section class="searchRestaurant hide">
             <form>
                 <label for="restaurantSearch"></label>
-                <input type="text" name="restaurantSearch" placeholder="Resturant Name" required>
+                <input type="text" name="restaurantSearch" id="restaurantSearch" placeholder="Resturant Name" required>
                 <label for="citySearch"></label>
-                <input type="text" name="citySearch" placeholder="City" required>
+                <input type="text" name="citySearch" id ="citySearch" placeholder="City" required>
                 <input type="submit" value="Search">
             </form>
         </section>
 
-        <section class="searchCuisine">
+        <section class="searchCuisine hide">
             <form>
                 <label for="cuisineSearch"></label>
                 <input type="text" name="cuisineSearch" placeholder="Cuisine" required>
@@ -45,9 +64,14 @@
                 <input type="submit" value="Search">
             </form>
         </section>
+
+                <section class="results hide"></section>
+
+              
     </main>
 
 
 </body>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="app.js"></script>
 </html>
