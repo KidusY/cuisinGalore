@@ -28,6 +28,7 @@ const getDataById = (id) => {
 	fetch(newUrl, option).then((res) => res.json()).then((resjson) => console.log(resjson));
 };
 
+//events
 const events = () => {
 	$('.widget1').click(function (e){
 		e.preventDefault();
@@ -37,8 +38,8 @@ const events = () => {
 };
 
 function main (){
-	//gets info for search restaurant by name
 	events();
+	//gets info for search restaurant by name
 	$('form').on('submit', (e) => {
 		e.preventDefault();
 		const restaurantSearch = $('#restaurantSearch').val().trim();
