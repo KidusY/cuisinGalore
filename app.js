@@ -23,5 +23,4 @@ const getData = (url, option) => {
 };
 
 function main (){}
-
 $(main);
