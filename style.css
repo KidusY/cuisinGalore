@@ -3,6 +3,7 @@
 	--font1: Pacifico, cursive;
 	--font2: Dancing Script, cursive;
 	--font3: Arvo, serif;
+	--color: #a80300;
 }
 
 * {
@@ -17,7 +18,7 @@
 
 h1 {
 	cursor: pointer;
-	color: #ff3c38;
+	color: var(--color);
 }
 
 .landingPage {
@@ -27,7 +28,7 @@ h1 {
 	font-family: var(--font1);
 	text-align: center;
 	padding-top: 30px;
-	font-size: 50px;
+	font-size: 80px;
 }
 
 .landingPage .widgets {
@@ -67,7 +68,7 @@ h1 {
 	font-family: var(--font1);
 	text-align: center;
 	padding-top: 30px;
-	font-size: 50px;
+	font-size: 80px;
 }
 .searchRestaurant h2 {
 	font-family: var(--font2);
@@ -84,17 +85,17 @@ h1 {
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	background-color: yellow;
-	border: solid black 3px;
 }
 
 #button {
-	width: 75px;
-	height: 20px;
-	background-color: rgb(130, 192, 255);
-	border-radius: 3px;
+	width: 100px;
+	padding: 10px;
+	color: white;
+	background-color: var(--color);
+	border-radius: 20px;
+	border: none;
+	outline: none;
 	cursor: pointer;
-	border: solid black 1px;
 	transition: ease 0.3s;
 }
 
@@ -103,15 +104,14 @@ h1 {
 	color: white;
 	text-align: center;
 }
-
-#restaurantSearch,
-#citySearch {
-	width: 175px;
-	height: 20px;
-	border: solid black 1px;
-	border-radius: 3px;
+.input {
+	width: 300px;
+	padding: 10px;
+	border-radius: 20px;
 	text-align: center;
 	font-family: var(--font3);
+	font-size: 20px;
+	outline: none;
 }
 
 .search h1 {
@@ -136,7 +136,7 @@ h1 {
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	background-color: yellow;
+
 	border: solid black 3px;
 }
 

@@ -42,7 +42,6 @@ const renderHtml = (restaurants) => {
 
 //search for restaurants by name
 const getDataByName = async (restaurantSearch, cityName) => {
-	console.log(restaurantSearch, cityName);
 	const cityData = await getLocationId(cityName);
 	const cityId = await cityData.location_suggestions[0].city_id;
 	const params = {};
@@ -52,7 +51,18 @@ const getDataByName = async (restaurantSearch, cityName) => {
 	params.entity_id = cityId;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearch}?${searchParams}`;
-	fetch(newUrl, option).then((res) => res.json()).then((resjson) => renderHtml(resjson.restaurants));
+	fetch(newUrl, option)
+		.then((res) => {
+			if (res.ok) {
+				console.log('Error');
+				return res.json();
+			}
+			else {
+				console.log('Error');
+				throw new Error('Error');
+			}
+		})
+		.then((resjson) => renderHtml(resjson.restaurants));
 };
 
 //get location by name and passes the city Id to discover
@@ -62,7 +72,14 @@ const getLocationId = (citySearch) => {
 	params.query = citySearch;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearchLocation}?${searchParams}`;
-	return fetch(newUrl, option).then((res) => res.json());
+	return fetch(newUrl, option).then((res) => {
+		if (res.ok) {
+			return res.json();
+		}
+
+		console.log('Error');
+		throw new Error('Error');
+	});
 };
 
 //get info by restaurant id
@@ -85,12 +102,19 @@ const discover = async (cityName) => {
 	const searchParams = $.param(params);
 	newUrl = `${urlDiscover}?${searchParams}`;
 	//collections obj
-	fetch(newUrl, option).then((res) => res.json()).then((resjson) => renderHtmlDiscover(resjson.collections, cityId));
+	fetch(newUrl, option)
+		.then((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+			console.log('Error');
+			throw new Error('Error');
+		})
+		.then((resjson) => renderHtmlDiscover(resjson.collections, cityId));
 };
 
 //render for collection
 const renderHtmlDiscover = (collections, cityId) => {
-	console.log(collections);
 	$('.collections').empty();
 	$('.collections').show();
 	for (const collection of collections) {
@@ -107,7 +131,6 @@ const renderHtmlDiscover = (collections, cityId) => {
 };
 
 const collections = (collections, cityId) => {
-	console.log(cityId);
 	const params = {};
 	let newUrl;
 	params.entity_id = cityId;
@@ -115,7 +138,19 @@ const collections = (collections, cityId) => {
 	params.collection_id = collections;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearch}?${searchParams}`;
-	fetch(newUrl, option).then((res) => res.json()).then((resjson) => renderHtml(resjson.restaurants));
+	fetch(newUrl, option)
+		.then((res) => {
+			if (res.ok) {
+				console.log('Error');
+				return res.json();
+			}
+			else {
+				console.log('Error');
+				throw new Error('Error');
+			}
+		})
+		.then((resjson) => renderHtml(resjson.restaurants))
+		.catch((res) => alert(res));
 };
 
 //events
