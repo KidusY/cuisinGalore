@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo|Dancing+Script|Pacifico&display=swap');
+:root {
+	--font1: Pacifico, cursive;
+	--font2: Dancing Script, cursive;
+	--font3: Arvo, serif;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.hide {
+	display: none;
+}
+
+h1 {
+	cursor: pointer;
+	color: #ff3c38;
+}
+
+.landingPage {
+	width: 100%;
+}
+.landingPage h1 {
+	font-family: var(--font1);
+	text-align: center;
+	padding-top: 30px;
+	font-size: 50px;
+}
+
+.landingPage .widgets {
+	font-family: var(--font3);
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding-top: 100px;
+}
+
+.widgets div {
+	width: 30%;
+	height: 300px;
+	background-color: rgb(158, 206, 255);
+	cursor: pointer;
+	padding: 100px;
+	border-radius: 40px;
+}
+
+.widgets p {
+	text-align: center;
+	padding-top: 30px;
+}
+.widgets div:hover {
+	transform: scale(1.1);
+	background-color: rgb(2, 2, 185);
+	color: white;
+	transition: ease-in 0.4s;
+}
+
+.results .resultsBox {
+	display: flex;
+}
+
+.searchRestaurant h1 {
+	font-family: var(--font1);
+	text-align: center;
+	padding-top: 30px;
+	font-size: 50px;
+}
+.searchRestaurant h2 {
+	font-family: var(--font2);
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 15px;
+	font-size: 35px;
+}
+
+.searchRestaurantForm {
+	display: inline-block;
+	width: 100%;
+	justify-content: space-evenly;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: yellow;
+	border: solid black 3px;
+}
+
+#button {
+	width: 75px;
+	height: 20px;
+	background-color: rgb(130, 192, 255);
+	border-radius: 3px;
+	cursor: pointer;
+	border: solid black 1px;
+	transition: ease 0.3s;
+}
+
+#button:hover {
+	background-color: rgb(2, 2, 185);
+	color: white;
+	text-align: center;
+}
+
+#restaurantSearch,
+#citySearch {
+	width: 175px;
+	height: 20px;
+	border: solid black 1px;
+	border-radius: 3px;
+	text-align: center;
+	font-family: var(--font3);
+}
+
+.search h1 {
+	font-family: var(--font1);
+	text-align: center;
+	padding-top: 30px;
+	font-size: 50px;
+}
+
+.search h2 {
+	font-family: var(--font2);
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 15px;
+	font-size: 35px;
+}
+
+.discoverForm {
+	display: inline-block;
+	width: 100%;
+	justify-content: space-evenly;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: yellow;
+	border: solid black 3px;
+}
+
+.collections {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	padding-top: 30px;
+	font-family: var(--font3);
+	line-height: 2.5;
+}
+.collections img {
+	width: 50%;
+	border-radius: 30px;
+}
