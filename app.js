@@ -1,22 +1,26 @@
 'use strict';
 
+let counter = 0;
 const api = '2ce4ead64f6aba19ba40cdbd3a3963c6';
 const urlSearch = 'https://developers.zomato.com/api/v2.1/search';
 const urlSearchId = 'https://developers.zomato.com/api/v2.1/restaurant';
 const urlSearchLocation = 'https://developers.zomato.com/api/v2.1/locations';
 const urlDiscover = 'https://developers.zomato.com/api/v2.1/collections';
 const option = {
-	headers : new Headers({
-		'user-key' : api
+	headers: new Headers({
+		'user-key': api
 	})
 };
 //render results for search restaurant by name
 const renderHtml = (restaurants) => {
-	console.log(restaurants);
 	$('.results').empty();
 	$('.results').show();
+	$('.loading').hide()
+	if (counter == 1) {
+		$('.results').append(`<button class="back">Back</button>`)
+	}
 	for (const restaurant of restaurants) {
-		$('.results').append(`		
+		$('.results').append(`		 
 			<div class = resultsBox data-restaurantId = ${restaurant.restaurant.id}>
 				<img src="${restaurant.restaurant.featured_image}" alt="${restaurant.restaurant.name}">				
 				<div class="description">
@@ -30,9 +34,9 @@ const renderHtml = (restaurants) => {
 					</address>	
 
 					<span class ="Features">Features:</span> ${restaurant.restaurant.highlights[0]},${restaurant.restaurant
-			.highlights[1]},${restaurant.restaurant.highlights[2]}
+				.highlights[1]},${restaurant.restaurant.highlights[2]}
 					<p class= "rating" color="${restaurant.restaurant.user_rating.rating_color}">${restaurant.restaurant.user_rating
-			.aggregate_rating}, ${restaurant.restaurant.user_rating.rating_text}</p>
+				.aggregate_rating}, ${restaurant.restaurant.user_rating.rating_text}</p>
 				</div>
 				<p class ="timeOpen"> ${restaurant.restaurant.timings}</p>
 			</div>		
@@ -51,18 +55,32 @@ const getDataByName = async (restaurantSearch, cityName) => {
 	params.entity_id = cityId;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearch}?${searchParams}`;
+	$('.loading').show();
 	fetch(newUrl, option)
 		.then((res) => {
 			if (res.ok) {
-				console.log('Error');
 				return res.json();
 			}
 			else {
-				console.log('Error');
 				throw new Error('Error');
 			}
+
 		})
-		.then((resjson) => renderHtml(resjson.restaurants));
+		.then((resjson) => {
+			if (resjson.restaurants.length == 0) {
+				$('.loading').hide()
+				throw new Error('No Results')
+			}
+			else {
+				$('.loading').hide();
+				renderHtml(resjson.restaurants)
+			}
+		})
+		.catch(err => {
+			$('.results').show()
+			$('.results').empty()
+			$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
+		})
 };
 
 //get location by name and passes the city Id to discover
@@ -76,9 +94,8 @@ const getLocationId = (citySearch) => {
 		if (res.ok) {
 			return res.json();
 		}
-
-		console.log('Error');
 		throw new Error('Error');
+
 	});
 };
 
@@ -102,21 +119,38 @@ const discover = async (cityName) => {
 	const searchParams = $.param(params);
 	newUrl = `${urlDiscover}?${searchParams}`;
 	//collections obj
+	$('.loading').show();
 	fetch(newUrl, option)
 		.then((res) => {
 			if (res.ok) {
 				return res.json();
-			}
-			console.log('Error');
-			throw new Error('Error');
+			} else { 
+				$('.loading').hide()
+				throw new Error('Error'); }
 		})
-		.then((resjson) => renderHtmlDiscover(resjson.collections, cityId));
+		.then((resjson) => {
+			if (resjson.collections.length == 0) {
+				$('.loading').hide()
+				throw new Error('No Results')
+			}
+			else {
+				$('.loading').hide();
+				renderHtmlDiscover(resjson.collections, cityId)
+			}
+		})
+		.catch(err => {
+			$('.collections').show()
+			$('.collections').empty()
+			$('.loading').hide()
+			$('.collections').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
+		})
 };
 
 //render for collection
 const renderHtmlDiscover = (collections, cityId) => {
 	$('.collections').empty();
 	$('.collections').show();
+	$('.loading').hide()
 	for (const collection of collections) {
 		$('.collections').append(`		
 		<div data-target=${collection.collection.collection_id} data-cityId=${cityId}>
@@ -138,48 +172,70 @@ const collections = (collections, cityId) => {
 	params.collection_id = collections;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearch}?${searchParams}`;
+	$('.loading').show();
 	fetch(newUrl, option)
 		.then((res) => {
 			if (res.ok) {
-				console.log('Error');
 				return res.json();
 			}
 			else {
-				console.log('Error');
+				$('.loading').hide()
 				throw new Error('Error');
 			}
 		})
-		.then((resjson) => renderHtml(resjson.restaurants))
-		.catch((res) => alert(res));
+		.then((resjson) => {
+			renderHtml(resjson.restaurants)
+			if (resjson.restaurants.length == 0) {
+				$('.loading').hide()
+				throw new Error('No Results')
+			}
+			else {
+				$('.loading').hide();
+				renderHtml(resjson.restaurants)
+			}
+
+		})
+		.catch(err => {
+			$('.results').show()
+			$('.results').empty()
+			$('.results').append(`<p class="noResults">No Results</p>`)
+		})
 };
 
 //events
 const events = () => {
-	$('.widget1').click(function (e){
+	$('.widget1').click(function (e) {
 		e.preventDefault();
 		$('main section').hide();
 		$('.searchRestaurant').show();
 	});
-	$('.widget2').click(function (e){
+	$('.widget2').click(function (e) {
 		e.preventDefault();
 		$('main section').hide();
 		$('.search').show();
 	});
 
-	$('.collections').on('click', 'div', function (e){
+	$('.collections').on('click', 'div', function (e) {
 		e.preventDefault();
 		$('.collections').hide();
 		collections($(this)[0].dataset.target, $(this)[0].dataset.cityid);
+		$('.back').show();
 	});
 
 	//returns to landing page on h1 click
-	$('.headerH1').click(function (e){
+	$('.headerH1').click(function (e) {
 		e.preventDefault();
 		$('main section').hide();
 		$('.landingPage').show();
 	});
+
+	$('.results').on("click", ".back", function (e) {
+		e.preventDefault();
+		$('.collections').show();
+		$('.results').hide();
+	})
 };
-function main (){
+function main() {
 	events();
 	//gets info for search restaurant by name
 	$('.searchRestaurantForm').on('submit', (e) => {
@@ -189,6 +245,8 @@ function main (){
 		getDataByName(restaurantSearch, citySearch);
 		$('#restaurantSearch').val('');
 		$('#citySearchRestaurant').val('');
+		counter = 0;
+		$('.back').hide();
 		$('.results').show();
 	});
 
@@ -199,6 +257,7 @@ function main (){
 		const citySearch = $('#citySearch').val().trim();
 		discover(citySearch);
 		$('#citySearch').val('');
+		counter = 1;
 	});
 
 	//after selecting a restaurant, search info by Id

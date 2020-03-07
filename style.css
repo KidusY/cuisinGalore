@@ -15,9 +15,7 @@
 	overflow-x: hidden;
 }
 
-.hide {
-	display: none;
-}
+
 .text-mute {
 	color: rgb(95, 95, 95);
 	font-size: 1rem;
@@ -264,6 +262,42 @@ h1 {
 .collections img:hover {
 	transform: scale(1.08);
 	transition: ease-in-out 0.4s;
+}
+
+.noResults {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	font-family: var(--font3);
+	font-size: 30px;
+
+}
+
+.back {
+	margin-left: 50px;
+	margin-top: 100px;
+	padding: 20px 30px;
+	border-radius: 20px;
+	border-color: var(--color2);
+	cursor: pointer;
+	outline: none;
+	transition: ease-in 0.3s;
+	font-size: 1rem;
+}
+
+.back:hover {
+	color: white;
+	background-color: var(--color);
+	transition: ease-in 0.3s;
+}
+
+.loading {
+	position: absolute;
+	left: 47%;
+}
+
+.hide {
+	display: none;
 }
 
 @media (min-width: 1024px) {
