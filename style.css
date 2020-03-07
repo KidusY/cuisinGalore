@@ -115,8 +115,11 @@ h1 {
 	color: white;
 	transition: ease-in 0.5s;
 }
+.results {
 
-.results .resultsBox {
+}
+
+.resultsBox {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -174,7 +177,7 @@ h1 {
 	width: 100%;
 	justify-content: space-evenly;
 	text-align: center;
-	padding-top: 20px;
+	padding-top: 5px;
 	padding-bottom: 20px;
 }
 
@@ -229,7 +232,7 @@ h1 {
 	display: block;
 	width: 100%;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-top: 5px;
 	padding-bottom: 20px;
 }
 #discoverButton {
@@ -275,7 +278,7 @@ h1 {
 
 .back {
 	margin-left: 50px;
-	margin-top: 100px;
+	margin-top: 15px;
 	padding: 20px 30px;
 	border-radius: 20px;
 	border-color: var(--color2);

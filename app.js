@@ -18,11 +18,18 @@ const renderHtml = (restaurants) => {
 	$('.loading').hide()
 	if (counter == 1) {
 		$('.results').append(`<button class="back">Back</button>`)
-	}
+	} 
 	for (const restaurant of restaurants) {
+		let url = restaurant.restaurant.featured_image
+		let imageUrl = url.split(".")
+		let image = restaurant.restaurant.featured_image
+			if (imageUrl [imageUrl.length - 1] != "jpg")
+			{
+				image = "assets/noimage.jpg"
+			}
 		$('.results').append(`		 
 			<div class = resultsBox data-restaurantId = ${restaurant.restaurant.id}>
-				<img src="${restaurant.restaurant.featured_image}" alt="${restaurant.restaurant.name}">				
+				<img src="${image}" alt="${restaurant.restaurant.name}">				
 				<div class="description">
 					<h1>${restaurant.restaurant.name}</h1>
 					<h4>${restaurant.restaurant.cuisines}</h4>
