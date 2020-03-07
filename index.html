@@ -11,7 +11,11 @@
 <body>
 
     <header>
-
+        
+    <div class = "header">
+         <h1 class ="headerH1">Cuisine Galore</h1>
+         <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </h2>
+    </div>
     </header>
 
     <main>
@@ -20,45 +24,39 @@
 <!--------Landing page-------------------->
 <section class = "landingPage">
 
-    <h1>Cuisine Galore</h1>
+   
     <div class="widgets">
         <div class ="widget1">
-           <p>Search For Restaurants or Cuisines</p>
+           <h2>Search For Restaurants or Cuisines</h2>
         </div>
         <div class = "widget2">
-            <p>Discover Near You</p>
+            <h2>Discover Near You</h2>
         </div>
       
     </div>
 
     
-</section>
-
-        <section class="search hide">
-            <h1>Cuisine Galore</h1>
-            <h2>Discover</h2>
-            <form class = "discoverForm">
-               
-                <label for="citySearch"></label>
-                <input type="text" name="citySearch" placeholder="City, State" id= "citySearch" required>
-                <input type="submit" value="Search" id="button">
-            </form>
-        </section>
-
-
-        
-        <section class="searchRestaurant hide">
-            <h1>Cuisine Galore</h1>
+</section>        
+        <section class="searchRestaurant hide">      
             <h2>Search</h2>
             <form class = "searchRestaurantForm">
                 <label for="restaurantSearch"></label>
                 <input type="text" class="input" name="restaurantSearch" id="restaurantSearch" placeholder="Resturant Name" required>
                 <label for="citySearch"></label>
                 <input type="text"class="input" name="citySearch" id ="citySearchRestaurant" placeholder="City" required>
-                <input type="submit" value="Search" id="button">
+                <input type="submit" value="Search" class="button">
             </form>
         </section>
 
+        <section class="search hide">           
+            <h2>Discover</h2>
+            <form class = "discoverForm">
+               
+                <label for="citySearch"></label>
+                <input type="text" class="input" name="citySearch" placeholder="City" id= "citySearch" required>
+                <input type="submit"class="button" value="Search" id="discoverButton">
+            </form>
+        </section>
 
                 <section class="results hide">
                     

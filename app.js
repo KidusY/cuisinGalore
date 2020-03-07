@@ -18,7 +18,7 @@ const renderHtml = (restaurants) => {
 	for (const restaurant of restaurants) {
 		$('.results').append(`		
 			<div class = resultsBox data-restaurantId = ${restaurant.restaurant.id}>
-				<img src="${restaurant.restaurant.featured_image}" alt="" width=30%>				
+				<img src="${restaurant.restaurant.featured_image}" alt="${restaurant.restaurant.name}">				
 				<div class="description">
 					<h1>${restaurant.restaurant.name}</h1>
 					<h4>${restaurant.restaurant.cuisines}</h4>
@@ -29,8 +29,8 @@ const renderHtml = (restaurants) => {
 					</a>
 					</address>	
 
-					<p class ="Features">Features ${restaurant.restaurant.highlights[0]},${restaurant.restaurant
-			.highlights[1]},${restaurant.restaurant.highlights[2]}</p>
+					<span class ="Features">Features:</span> ${restaurant.restaurant.highlights[0]},${restaurant.restaurant
+			.highlights[1]},${restaurant.restaurant.highlights[2]}
 					<p class= "rating" color="${restaurant.restaurant.user_rating.rating_color}">${restaurant.restaurant.user_rating
 			.aggregate_rating}, ${restaurant.restaurant.user_rating.rating_text}</p>
 				</div>
@@ -121,9 +121,9 @@ const renderHtmlDiscover = (collections, cityId) => {
 		$('.collections').append(`		
 		<div data-target=${collection.collection.collection_id} data-cityId=${cityId}>
 				<h2>${collection.collection.title}</h2>
-				<p>${collection.collection.description}</p>
+				<h3 class ="text-mute">${collection.collection.description}</h3>
 				<img src="${collection.collection.image_url}">
-				<p>${collection.collection.url}</p>				
+							
 		</div>
 		
 		`);
@@ -173,8 +173,9 @@ const events = () => {
 	});
 
 	//returns to landing page on h1 click
-	$('.searchRestaurant', 'search').on('click', 'h1', function (e){
+	$('.headerH1').click(function (e){
 		e.preventDefault();
+		$('main section').hide();
 		$('.landingPage').show();
 	});
 };
@@ -186,6 +187,8 @@ function main (){
 		const restaurantSearch = $('#restaurantSearch').val().trim();
 		const citySearch = $('#citySearchRestaurant').val().trim();
 		getDataByName(restaurantSearch, citySearch);
+		$('#restaurantSearch').val('');
+		$('#citySearchRestaurant').val('');
 		$('.results').show();
 	});
 
@@ -195,6 +198,7 @@ function main (){
 		$('.results').hide();
 		const citySearch = $('#citySearch').val().trim();
 		discover(citySearch);
+		$('#citySearch').val('');
 	});
 
 	//after selecting a restaurant, search info by Id

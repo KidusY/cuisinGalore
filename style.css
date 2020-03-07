@@ -4,16 +4,46 @@
 	--font2: Dancing Script, cursive;
 	--font3: Arvo, serif;
 	--color: #a80300;
+	--color2: #950000;
+	--color3: #176280;
 }
 
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 .hide {
 	display: none;
+}
+.text-mute {
+	color: rgb(95, 95, 95);
+	font-size: 1rem;
+}
+header .header {
+	background-image: linear-gradient(90deg, #550101a6, #2c0000a1), url("assets/anshu-a-mVXZRwUypnM-unsplash.jpg");
+	height: 350px;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: darken;
+}
+header .header h1 {
+	color: white;
+	font-family: var(--font1);
+	text-align: center;
+	position: relative;
+	top: 100px;
+	font-size: 2.5rem;
+}
+header .header h2 {
+	color: white;
+	font-family: var(--font2);
+	text-align: center;
+	position: relative;
+	top: 100px;
+	font-size: 1.5rem;
 }
 
 h1 {
@@ -41,27 +71,88 @@ h1 {
 }
 
 .widgets div {
-	width: 30%;
-	height: 300px;
-	background-color: rgb(158, 206, 255);
+	width: 50%;
+	min-width: 300px;
+	max-width: 500px;
+	height: 370px;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: darken;
 	cursor: pointer;
-	padding: 100px;
+	text-align: center;
 	border-radius: 40px;
+	margin: 20px;
+}
+.widgets div:nth-child(1) {
+	background-image: linear-gradient(90deg, #550101a6, #2c0000a1),
+		url("assets/patrick-tomasso-GXXYkSwndP4-unsplash.jpg");
+	transition: ease-in 0.5s;
 }
 
-.widgets p {
-	text-align: center;
-	padding-top: 30px;
+.widgets div:nth-child(2) {
+	background-image: linear-gradient(90deg, #550101a6, #2c0000a1),
+		url("assets/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg");
+	transition: ease-in 0.5s;
 }
-.widgets div:hover {
-	transform: scale(1.1);
-	background-color: rgb(2, 2, 185);
+.widgets h2 {
+	padding-top: 150px;
+	width: 100%;
 	color: white;
-	transition: ease-in 0.4s;
+	font-size: 1.7rem;
+	font-weight: bold;
+}
+.widgets div:nth-child(1):hover {
+	transform: scale(1.1);
+	background-image: linear-gradient(90deg, #55010175, #2c00006c),
+		url("assets/patrick-tomasso-GXXYkSwndP4-unsplash.jpg");
+	color: white;
+	transition: ease-in 0.5s;
+}
+.widgets div:nth-child(2):hover {
+	transform: scale(1.1);
+	background-image: linear-gradient(90deg, #55010175, #2c00006c),
+		url("assets/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg");
+	color: white;
+	transition: ease-in 0.5s;
 }
 
 .results .resultsBox {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	max-width: 850px;
+	min-width: 300px;
+	border: 2px var(--color) solid;
+	border-radius: 20px;
+	padding: 15px 2px;
+	box-shadow: 3px 3px 3px 3px rgba(87, 0, 0, 0.596);
+	margin: 30px auto;
+}
+.resultsBox img {
+	width: 50%;
+	max-width: 170px;
+	min-width: 100px;
+	height: 160px;
+	padding: 5px;
+	border-radius: 20px;
+}
+.resultsBox .timeOpen {
+	color: rgb(117, 117, 117);
+	text-align: center;
+	font-size: 0.8rem;
+	width: 70%;
+	margin: 0 auto;
+}
+.resultsBox .Features {
+	color: var(--color2);
+}
+.resultsBox .description {
+	width: 100%;
+	margin: 5px 15px;
+}
+.resultsBox a {
+	text-decoration: none;
 }
 
 .searchRestaurant h1 {
@@ -87,40 +178,45 @@ h1 {
 	padding-bottom: 20px;
 }
 
-#button {
-	width: 100px;
-	padding: 10px;
+.button {
+	width: 120px;
+	padding: 13px 18px;
+	margin: 5px;
 	color: white;
 	background-color: var(--color);
 	border-radius: 20px;
 	border: none;
 	outline: none;
 	cursor: pointer;
-	transition: ease 0.3s;
-}
-
-#button:hover {
-	background-color: rgb(2, 2, 185);
-	color: white;
+	transition: ease 0.4s;
+	font-family: var(--font3);
+	font-size: 1.2rem;
 	text-align: center;
 }
+
+.button:hover {
+	transform: scale(1.1);
+	background: var(--color3);
+	color: white;
+	text-align: center;
+	outline: none;
+}
 .input {
-	width: 300px;
+	display: block;
+	margin: 10px auto;
+	width: 310px;
 	padding: 10px;
 	border-radius: 20px;
 	text-align: center;
 	font-family: var(--font3);
 	font-size: 20px;
 	outline: none;
+	border-color: var(--color);
 }
-
-.search h1 {
-	font-family: var(--font1);
-	text-align: center;
-	padding-top: 30px;
-	font-size: 50px;
+#citySearch {
+	display: block;
+	margin: 0 auto;
 }
-
 .search h2 {
 	font-family: var(--font2);
 	text-align: center;
@@ -130,14 +226,15 @@ h1 {
 }
 
 .discoverForm {
-	display: inline-block;
+	display: block;
 	width: 100%;
-	justify-content: space-evenly;
-	text-align: center;
+	margin: 0 auto;
 	padding-top: 20px;
 	padding-bottom: 20px;
-
-	border: solid black 3px;
+}
+#discoverButton {
+	display: block;
+	margin: 10px auto;
 }
 
 .collections {
@@ -148,7 +245,39 @@ h1 {
 	font-family: var(--font3);
 	line-height: 2.5;
 }
+.collections div {
+	text-align: center;
+	width: 50%;
+	min-width: 300px;
+	cursor: pointer;
+}
+
 .collections img {
 	width: 50%;
+	margin-top: 15px;
+	max-height: 500px;
 	border-radius: 30px;
+	transition: ease-in-out 0.4s;
+}
+.collections img:hover {
+	transform: scale(1.08);
+	transition: ease-in-out 0.4s;
+}
+
+@media (min-width: 1024px) {
+	header .header {
+		background-image: linear-gradient(90deg, #550101a6, #2c0000a1),
+			url("assets/florian-metzner-12IsagncQ7o-unsplash.jpg");
+		background-position: unset;
+	}
+	.results .resultsBox {
+		justify-content: unset;
+	}
+	.input {
+		width: 400px;
+	}
+	.results .resultsBox {
+		display: flex;
+		flex-wrap: nowrap;
+	}
 }
