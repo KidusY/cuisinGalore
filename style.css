@@ -134,7 +134,7 @@ h1 {
 	width: 50%;
 	max-width: 170px;
 	min-width: 100px;
-	max-height: fit-content;
+	max-height: 200px;
 	padding: 5px;
 	border-radius: 20px;
 }
