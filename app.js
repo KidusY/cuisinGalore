@@ -1,6 +1,6 @@
 'use strict';
 
-let counter = 0;
+let check = 0;
 const api = '2ce4ead64f6aba19ba40cdbd3a3963c6';
 const urlSearch = 'https://developers.zomato.com/api/v2.1/search';
 const urlSearchId = 'https://developers.zomato.com/api/v2.1/restaurant';
@@ -16,45 +16,63 @@ const renderHtml = (restaurants) => {
 	$('.results').empty();
 	$('.results').show();
 	$('.loading').hide()
-	if (counter == 1) {
+	/*checks whether or the search is coming form 
+	either search by restaurant or discover.
+   depending on that button gets rendered out */
+	if (check == 1) {
 		$('.results').append(`<button class="back">Back</button>`)
-	} 
+	}
 	for (const restaurant of restaurants) {
 		let url = restaurant.restaurant.featured_image
 		let imageUrl = url.split(".")
 		let image = restaurant.restaurant.featured_image
-			if (imageUrl [imageUrl.length - 1] != "jpg")
-			{
-				image = "assets/noimage.jpg"
-			}
+		//checks if there is broken img link coming through 
+		if (imageUrl[imageUrl.length - 1] != "jpg") {
+			image = "assets/noimage.jpg"
+		}
+
 		$('.results').append(`		 
 			<div class = resultsBox data-restaurantId = ${restaurant.restaurant.id}>
-				<img src="${image}" alt="${restaurant.restaurant.name}">				
+			<img src="${image}" alt="${restaurant.restaurant.name}">				
 				<div class="description">
 					<h1>${restaurant.restaurant.name}</h1>
 					<h4>${restaurant.restaurant.cuisines}</h4>
 					<address>			
-					<a href="https://maps.google.com/?q=${restaurant.restaurant.location.address}">
+					<a href="https://maps.google.com/?q=${restaurant.restaurant.location.address}" target="_blank" >
 					<h5>${restaurant.restaurant.location.address}</h5>
 					<h6>${restaurant.restaurant.location.locality}</h6>
 					</a>
 					</address>	
 
 					<span class ="Features">Features:</span> ${restaurant.restaurant.highlights[0]},${restaurant.restaurant
-				.highlights[1]},${restaurant.restaurant.highlights[2]}
+				.highlights[1]}}
 					<p class= "rating" color="${restaurant.restaurant.user_rating.rating_color}">${restaurant.restaurant.user_rating
 				.aggregate_rating}, ${restaurant.restaurant.user_rating.rating_text}</p>
 				</div>
 				<p class ="timeOpen"> ${restaurant.restaurant.timings}</p>
 			</div>		
 		`);
+
+
 	}
 };
 
 //search for restaurants by name
 const getDataByName = async (restaurantSearch, cityName) => {
-	const cityData = await getLocationId(cityName);
-	const cityId = await cityData.location_suggestions[0].city_id;
+	let cityData;
+	let cityId;
+	try {
+		cityData = await getLocationId(cityName);
+	} catch (err) {
+		$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`);
+	}
+	try {
+		cityId = await cityData.location_suggestions[0].city_id;
+	} catch (err) {
+		$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`);
+	}
+
+
 	const params = {};
 	let newUrl;
 	params.q = restaurantSearch;
@@ -67,8 +85,7 @@ const getDataByName = async (restaurantSearch, cityName) => {
 		.then((res) => {
 			if (res.ok) {
 				return res.json();
-			}
-			else {
+			} else {
 				throw new Error('Error');
 			}
 
@@ -77,8 +94,7 @@ const getDataByName = async (restaurantSearch, cityName) => {
 			if (resjson.restaurants.length == 0) {
 				$('.loading').hide()
 				throw new Error('No Results')
-			}
-			else {
+			} else {
 				$('.loading').hide();
 				renderHtml(resjson.restaurants)
 			}
@@ -98,23 +114,19 @@ const getLocationId = (citySearch) => {
 	const searchParams = $.param(params);
 	newUrl = `${urlSearchLocation}?${searchParams}`;
 	return fetch(newUrl, option).then((res) => {
-		if (res.ok) {
-			return res.json();
-		}
-		throw new Error('Error');
+			if (res.ok) {
+				return res.json();
+			}
+			throw new Error('Error');
 
-	});
+		})
+		.catch(err => {
+			$('.results').show()
+			$('.results').empty()
+			$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
+		})
 };
 
-//get info by restaurant id
-const getDataById = (id) => {
-	const params = {};
-	let newUrl;
-	params.res_id = id;
-	const searchParams = $.param(params);
-	newUrl = `${urlSearchId}?${searchParams}`;
-	fetch(newUrl, option).then((res) => res.json()).then((resjson) => resjson);
-};
 
 //get different restaurants by city Id
 const discover = async (cityName) => {
@@ -131,16 +143,16 @@ const discover = async (cityName) => {
 		.then((res) => {
 			if (res.ok) {
 				return res.json();
-			} else { 
+			} else {
 				$('.loading').hide()
-				throw new Error('Error'); }
+				throw new Error('Error');
+			}
 		})
 		.then((resjson) => {
 			if (resjson.collections.length == 0) {
 				$('.loading').hide()
 				throw new Error('No Results')
-			}
-			else {
+			} else {
 				$('.loading').hide();
 				renderHtmlDiscover(resjson.collections, cityId)
 			}
@@ -184,8 +196,7 @@ const collections = (collections, cityId) => {
 		.then((res) => {
 			if (res.ok) {
 				return res.json();
-			}
-			else {
+			} else {
 				$('.loading').hide()
 				throw new Error('Error');
 			}
@@ -195,8 +206,7 @@ const collections = (collections, cityId) => {
 			if (resjson.restaurants.length == 0) {
 				$('.loading').hide()
 				throw new Error('No Results')
-			}
-			else {
+			} else {
 				$('.loading').hide();
 				renderHtml(resjson.restaurants)
 			}
@@ -242,6 +252,7 @@ const events = () => {
 		$('.results').hide();
 	})
 };
+
 function main() {
 	events();
 	//gets info for search restaurant by name
@@ -252,8 +263,9 @@ function main() {
 		getDataByName(restaurantSearch, citySearch);
 		$('#restaurantSearch').val('');
 		$('#citySearchRestaurant').val('');
-		counter = 0;
+		check = 0;
 		$('.back').hide();
+		$('.results').empty();
 		$('.results').show();
 	});
 

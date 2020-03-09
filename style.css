@@ -15,7 +15,6 @@
 	overflow-x: hidden;
 }
 
-
 .text-mute {
 	color: rgb(95, 95, 95);
 	font-size: 1rem;
@@ -116,7 +115,6 @@ h1 {
 	transition: ease-in 0.5s;
 }
 .results {
-
 }
 
 .resultsBox {
@@ -136,7 +134,7 @@ h1 {
 	width: 50%;
 	max-width: 170px;
 	min-width: 100px;
-	height: 160px;
+	max-height: fit-content;
 	padding: 5px;
 	border-radius: 20px;
 }
@@ -273,7 +271,6 @@ h1 {
 	text-align: center;
 	font-family: var(--font3);
 	font-size: 30px;
-
 }
 
 .back {
@@ -296,7 +293,7 @@ h1 {
 
 .loading {
 	position: absolute;
-	left: 47%;
+	left: 46%;
 }
 
 .hide {
