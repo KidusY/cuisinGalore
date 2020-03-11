@@ -11,67 +11,70 @@
 <body>
 
     <header>
-        
-    <div class = "header">
-         <h1 class ="headerH1">Cuisine Galore</h1>
-         <h2>Search Your Favorite Restaurants!</h2>
-    </div>
+
+        <div class="header">
+            <h1 class="headerH1">Cuisine Galore</h1>
+            <h2>Search Your Favorite Restaurants!</h2>
+        </div>
     </header>
 
     <main>
 
 
-<!--------Landing page-------------------->
-<section class = "landingPage">
 
-   
-    <div class="widgets">
-        <div class ="widget1">
-           <h2>Search For Restaurants or Cuisines</h2>
-        </div>
-        <div class = "widget2">
-            <h2>Discover Near You</h2>
-        </div>      
-    </div>
+        <section class="landingPage">
 
-    
-</section>        
-        <section class="searchRestaurant hide">      
+
+            <div class="widgets">
+                <div class="widget1">
+                    <h2>Search For Restaurants or Cuisines</h2>
+                </div>
+                <div class="widget2">
+                    <h2>Discover Near You</h2>
+                </div>
+            </div>
+
+
+        </section>
+        <section class="searchRestaurant hide">
             <h2>Search</h2>
-            <form class = "searchRestaurantForm">
+            <form class="searchRestaurantForm">
                 <label for="restaurantSearch"></label>
-                <input type="text" class="input" name="restaurantSearch" id="restaurantSearch" placeholder="Resturant Name" required>
+                <input type="text" class="input" name="restaurantSearch" id="restaurantSearch"
+                    placeholder="Resturant Name" required>
                 <label for="citySearch"></label>
-                <input type="text"class="input" name="citySearch" id ="citySearchRestaurant" placeholder="City" required>
+                <input type="text" class="input" name="citySearch" id="citySearchRestaurant" placeholder="City"
+                    required>
                 <input type="submit" value="Search" class="button">
             </form>
         </section>
 
-        <section class="search hide">           
+        <section class="search hide">
             <h2>Discover</h2>
-            <form class = "discoverForm">
-               
+            <form class="discoverForm">
+
                 <label for="citySearch"></label>
-                <input type="text" class="input" name="citySearch" placeholder="City" id= "citySearch" required>
+                <input type="text" class="input" name="citySearch" placeholder="City" id="citySearch" required>
                 <input type="submit" class="button" value="Search" id="discoverButton">
             </form>
         </section>
 
         <img class="loading hide" src="assets/loading spinner.png" alt="loading spinner">
 
-                <section class="results hide">
-                 
-                </section>
+        <section class="results hide">
 
-                <section class="collections">
-                        
-                </section>
+        </section>
 
-              
+        <section class="collections">
+
+        </section>
+
+
     </main>
 
 
 </body>
 <script src="jquery/jquery.min.js"></script>
 <script src="app.js"></script>
+
 </html>
