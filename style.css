@@ -140,14 +140,14 @@ h1 {
 	color: rgb(117, 117, 117);
 	text-align: center;
 	font-size: 0.8rem;
-	width: 70%;
+	width: 40%;
 	margin: 0 auto;
 }
 .resultsBox .Features {
 	color: var(--color2);
 }
 .resultsBox .description {
-	width: 100%;
+	width: 80%;
 	margin: 5px 15px;
 }
 .resultsBox a {
