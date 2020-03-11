@@ -36,7 +36,7 @@ const renderHtml = (restaurants) => {
 			<div class = resultsBox data-restaurantId = ${restaurant.restaurant.id}>
 			<img src="${image}" alt="${restaurant.restaurant.name}">				
 				<div class="description">
-					<h1>${restaurant.restaurant.name}</h1>
+					<h1 class="restaurant_name">${restaurant.restaurant.name}</h1>
 					<h4>${restaurant.restaurant.cuisines}</h4>
 					<address>			
 					<a href="https://maps.google.com/?q=${restaurant.restaurant.location.address}" target="_blank" >

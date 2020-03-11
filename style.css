@@ -180,7 +180,7 @@ h1 {
 	padding-bottom: 20px;
 }
 
-.button {
+.button_submit {
 	width: 120px;
 	padding: 13px 18px;
 	margin: 5px;
@@ -196,7 +196,7 @@ h1 {
 	text-align: center;
 }
 
-.button:hover {
+.button_submit:hover {
 	transform: scale(1.1);
 	background: var(--color3);
 	color: white;
@@ -302,6 +302,14 @@ h1 {
 
 .hide {
 	display: none;
+}
+
+.label_mult {
+	display: none;
+}
+
+.restaurant_name {
+	cursor: default;
 }
 
 @media (min-width: 1024px) {
