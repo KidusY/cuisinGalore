@@ -147,7 +147,7 @@ h1 {
 	color: var(--color2);
 }
 .resultsBox .description {
-	width: 80%;
+	width: 100%;
 	margin: 5px 15px;
 }
 .resultsBox a {
@@ -320,4 +320,8 @@ h1 {
 		display: flex;
 		flex-wrap: nowrap;
 	}
+	.resultsBox .description {
+	width: 70%;
+	margin: 5px 15px;
+}
 }
