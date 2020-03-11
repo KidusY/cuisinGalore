@@ -1,6 +1,6 @@
 'use strict';
 
-let check = 0;
+let showBackBtn = false;
 const api = '2ce4ead64f6aba19ba40cdbd3a3963c6';
 const urlSearch = 'https://developers.zomato.com/api/v2.1/search';
 const urlSearchId = 'https://developers.zomato.com/api/v2.1/restaurant';
@@ -13,22 +13,23 @@ const option = {
 };
 //render results for search restaurant by name
 const renderHtml = (restaurants) => {
+	$('.loading').hide();
 	$('.results').empty();
 	$('.results').show();
-	$('.loading').hide()
+
 	/*checks whether or the search is coming form 
 	either search by restaurant or discover.
    depending on that button gets rendered out */
-	if (check == 1) {
-		$('.results').append(`<button class="back">Back</button>`)
+	if (showBackBtn) {
+		$('.results').append(`<button class="back">Back</button>`);
 	}
 	for (const restaurant of restaurants) {
-		let url = restaurant.restaurant.featured_image
-		let imageUrl = url.split(".")
-		let image = restaurant.restaurant.featured_image
-		//checks if there is broken img link coming through 
-		if (imageUrl[imageUrl.length - 1] != "jpg") {
-			image = "assets/noimage.jpg"
+		let url = restaurant.restaurant.featured_image;
+		let imageUrl = url.split('.');
+		let image = restaurant.restaurant.featured_image;
+		//checks if there is broken img link coming through
+		if (imageUrl[imageUrl.length - 1] !== 'jpg') {
+			image = 'assets/noimage.jpg';
 		}
 
 		$('.results').append(`		 
@@ -44,35 +45,24 @@ const renderHtml = (restaurants) => {
 					</a>
 					</address>	
 
-					<span class ="Features">Features:</span> ${restaurant.restaurant.highlights[0]},${restaurant.restaurant
-				.highlights[1]}}
-					<p class= "rating" color="${restaurant.restaurant.user_rating.rating_color}">${restaurant.restaurant.user_rating
-				.aggregate_rating}, ${restaurant.restaurant.user_rating.rating_text}</p>
+					<span class ="Features">Features:</span> <span>${restaurant.restaurant.highlights.map((feature) => feature)}</span>
+					<p class= "rating">${restaurant.restaurant.user_rating.aggregate_rating}, ${restaurant.restaurant.user_rating
+			.rating_text}</p>
 				</div>
 				<p class ="timeOpen"> ${restaurant.restaurant.timings}</p>
 			</div>		
 		`);
-
-
 	}
 };
 
 //search for restaurants by name
 const getDataByName = async (restaurantSearch, cityName) => {
-	let cityData;
 	let cityId;
 	try {
-		cityData = await getLocationId(cityName);
+		cityId = await getLocationId(cityName);
 	} catch (err) {
-		$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`);
+		console.log(err);
 	}
-	try {
-		cityId = await cityData.location_suggestions[0].city_id;
-	} catch (err) {
-		$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`);
-	}
-
-
 	const params = {};
 	let newUrl;
 	params.q = restaurantSearch;
@@ -86,24 +76,32 @@ const getDataByName = async (restaurantSearch, cityName) => {
 			if (res.ok) {
 				return res.json();
 			} else {
+				$('.loading').hide();
 				throw new Error('Error');
 			}
-
 		})
 		.then((resjson) => {
+			$('.loading').hide();
+			renderHtml(resjson.restaurants);
 			if (resjson.restaurants.length == 0) {
-				$('.loading').hide()
-				throw new Error('No Results')
+				$('.loading').hide();
+				throw new Error('No Results');
 			} else {
 				$('.loading').hide();
-				renderHtml(resjson.restaurants)
+				renderHtml(resjson.restaurants);
 			}
 		})
-		.catch(err => {
-			$('.results').show()
-			$('.results').empty()
-			$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
-		})
+		.catch((err) => {
+			let error = 'No Results, Please Check a Different City';
+			if (err == "TypeError: Failed to fetch") {
+				error = 'No Internet Connection, Please Try again later';
+			}
+
+			$('.loading').hide();
+			$('.collections').empty();
+			$('.collections').append(`<p class="noResults">${error}</p>`);
+			$('.collections').show();
+		});
 };
 
 //get location by name and passes the city Id to discover
@@ -113,63 +111,72 @@ const getLocationId = (citySearch) => {
 	params.query = citySearch;
 	const searchParams = $.param(params);
 	newUrl = `${urlSearchLocation}?${searchParams}`;
-	return fetch(newUrl, option).then((res) => {
+
+	return fetch(newUrl, option)
+		.then((res) => {
 			if (res.ok) {
 				return res.json();
 			}
-			throw new Error('Error');
+		})
+		.then(resJson => resJson.location_suggestions[0].city_id)
+		.catch(e => console.log(e));
 
-		})
-		.catch(err => {
-			$('.results').show()
-			$('.results').empty()
-			$('.results').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
-		})
+
+
 };
-
 
 //get different restaurants by city Id
 const discover = async (cityName) => {
-	const res = await getLocationId(cityName);
-	let cityId = await res.location_suggestions[0].entity_id;
+	let cityId;
 	const params = {};
 	let newUrl;
+	try {
+		cityId = await getLocationId(cityName);
+	} catch (err) {
+		console.log(err);
+	}
+
 	params.city_id = cityId;
 	const searchParams = $.param(params);
 	newUrl = `${urlDiscover}?${searchParams}`;
 	//collections obj
-	$('.loading').show();
+
 	fetch(newUrl, option)
 		.then((res) => {
 			if (res.ok) {
+
 				return res.json();
 			} else {
-				$('.loading').hide()
+				$('.loading').hide();
 				throw new Error('Error');
 			}
 		})
 		.then((resjson) => {
 			if (resjson.collections.length == 0) {
-				$('.loading').hide()
-				throw new Error('No Results')
+				throw new Error('No Results');
 			} else {
 				$('.loading').hide();
-				renderHtmlDiscover(resjson.collections, cityId)
+				renderHtmlDiscover(resjson.collections, cityId);
 			}
 		})
-		.catch(err => {
-			$('.collections').show()
-			$('.collections').empty()
-			$('.loading').hide()
-			$('.collections').append(`<p class="noResults">No Results, Please Check a Different City</p>`)
-		})
+		.catch((err) => {
+
+			let error = 'No Results, Please Check a Different City';
+			if (err == "TypeError: Failed to fetch") {
+				error = 'No Internet Connection, Please Try again later';
+			}
+			$('.loading').hide();
+			$('.collections').empty();
+			$('.collections').append(`<p class="noResults">${error}</p>`);
+			$('.collections').show();
+		});
 };
 
 //render for collection
 const renderHtmlDiscover = (collections, cityId) => {
 	$('.collections').empty();
 	$('.collections').show();
-	$('.loading').hide()
+	$('.loading').hide();
 	for (const collection of collections) {
 		$('.collections').append(`		
 		<div data-target=${collection.collection.collection_id} data-cityId=${cityId}>
@@ -197,26 +204,29 @@ const collections = (collections, cityId) => {
 			if (res.ok) {
 				return res.json();
 			} else {
-				$('.loading').hide()
-				throw new Error('Error');
+				$('.loading').hide();
+				throw new Error('Network Error');
 			}
 		})
 		.then((resjson) => {
-			renderHtml(resjson.restaurants)
+			renderHtml(resjson.restaurants);
 			if (resjson.restaurants.length == 0) {
-				$('.loading').hide()
-				throw new Error('No Results')
+				$('.loading').hide();
+				throw new Error('No Results');
 			} else {
 				$('.loading').hide();
-				renderHtml(resjson.restaurants)
+				renderHtml(resjson.restaurants);
 			}
-
 		})
-		.catch(err => {
-			$('.results').show()
-			$('.results').empty()
-			$('.results').append(`<p class="noResults">No Results</p>`)
-		})
+		.catch((err) => {
+			let message = 'No Results';
+			if (err == 'Network Error') {
+				message = 'Network Error';
+			}
+			$('.results').show();
+			$('.results').empty();
+			$('.results').append(`<p class="noResults">${message}</p>`);
+		});
 };
 
 //events
@@ -246,11 +256,11 @@ const events = () => {
 		$('.landingPage').show();
 	});
 
-	$('.results').on("click", ".back", function (e) {
+	$('.results').on('click', '.back', function (e) {
 		e.preventDefault();
 		$('.collections').show();
 		$('.results').hide();
-	})
+	});
 };
 
 function main() {
@@ -258,12 +268,14 @@ function main() {
 	//gets info for search restaurant by name
 	$('.searchRestaurantForm').on('submit', (e) => {
 		e.preventDefault();
+		$('.results').empty();
+		$('.loading').show();
 		const restaurantSearch = $('#restaurantSearch').val().trim();
 		const citySearch = $('#citySearchRestaurant').val().trim();
 		getDataByName(restaurantSearch, citySearch);
 		$('#restaurantSearch').val('');
 		$('#citySearchRestaurant').val('');
-		check = 0;
+		showBackBtn = false;
 		$('.back').hide();
 		$('.results').empty();
 		$('.results').show();
@@ -272,14 +284,15 @@ function main() {
 	//discover restaurants
 	$('.discoverForm').on('submit', (e) => {
 		e.preventDefault();
+		$('.results').empty();
+		$('.loading').show();
+		$('.collections').empty();
 		$('.results').hide();
 		const citySearch = $('#citySearch').val().trim();
 		discover(citySearch);
 		$('#citySearch').val('');
-		counter = 1;
+		showBackBtn = true;
 	});
-
-	//after selecting a restaurant, search info by Id
 }
 
 $(main);

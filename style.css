@@ -114,8 +114,6 @@ h1 {
 	color: white;
 	transition: ease-in 0.5s;
 }
-.results {
-}
 
 .resultsBox {
 	display: flex;
@@ -154,6 +152,9 @@ h1 {
 }
 .resultsBox a {
 	text-decoration: none;
+}
+.resultsBox:focus {
+	transform: scale(1.1);
 }
 
 .searchRestaurant h1 {
@@ -293,7 +294,10 @@ h1 {
 
 .loading {
 	position: absolute;
-	left: 46%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	transform: translateX(-50px);
 }
 
 .hide {
