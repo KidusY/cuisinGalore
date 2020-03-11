@@ -98,9 +98,9 @@ const getDataByName = async (restaurantSearch, cityName) => {
 			}
 
 			$('.loading').hide();
-			$('.collections').empty();
-			$('.collections').append(`<p class="noResults">${error}</p>`);
-			$('.collections').show();
+			$('.results').empty();
+			$('.results').append(`<p class="noResults">${error}</p>`);
+			$('.results').show();
 		});
 };
 
@@ -166,9 +166,9 @@ const discover = async (cityName) => {
 				error = 'No Internet Connection, Please Try again later';
 			}
 			$('.loading').hide();
-			$('.collections').empty();
-			$('.collections').append(`<p class="noResults">${error}</p>`);
-			$('.collections').show();
+			$('.results').empty();
+			$('.results').append(`<p class="noResults">${error}</p>`);
+			$('.results').show();
 		});
 };
 
@@ -268,6 +268,7 @@ function main() {
 	//gets info for search restaurant by name
 	$('.searchRestaurantForm').on('submit', (e) => {
 		e.preventDefault();
+		$('.noResults').empty();
 		$('.results').empty();
 		$('.loading').show();
 		const restaurantSearch = $('#restaurantSearch').val().trim();
@@ -284,6 +285,7 @@ function main() {
 	//discover restaurants
 	$('.discoverForm').on('submit', (e) => {
 		e.preventDefault();
+		$('.noResults').empty();
 		$('.results').empty();
 		$('.loading').show();
 		$('.collections').empty();
