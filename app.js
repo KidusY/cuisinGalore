@@ -179,7 +179,7 @@ const renderHtmlDiscover = (collections, cityId) => {
 	$('.loading').hide();
 	for (const collection of collections) {
 		$('.collections').append(`		
-		<div data-target=${collection.collection.collection_id} data-cityId=${cityId} ztabindex="0">
+		<div data-target=${collection.collection.collection_id} data-cityId=${cityId} tabindex="0">
 				<h2>${collection.collection.title}</h2>
 				<h3 class ="text-mute">${collection.collection.description}</h3>
 				<img src="${collection.collection.image_url}">
