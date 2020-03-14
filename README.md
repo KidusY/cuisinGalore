@@ -1,8 +1,10 @@
 # Cuisine Galore
+![Image description](https://github.com/KidusY/cuisinGalore/blob/master/screenshots/Capture1.JPG)
 
 This app allows the users to select between searching a restaurant by name and city or discovering different restaurants by specifying a city. 
 
 ### Searching restaurants by name and city
+![Image description](https://github.com/KidusY/cuisinGalore/blob/master/screenshots/Capture2.JPG)
 The user enters a restaurants name and city name and lists down different restaurants with different information about it.
   1.pictures
   2.cusine type
@@ -10,7 +12,7 @@ The user enters a restaurants name and city name and lists down different restau
   4.features
   5.opening and closing times
 ### Discover
-![Image description](https://github.com/KidusY/cuisinGalore/blob/master/screenshots/Capture1.JPG)
+![Image description](https://github.com/KidusY/cuisinGalore/blob/master/screenshots/Capture3.JPG)
 The user enters a city name and lists down different collection of cuisine and activities. 
 Selecting those collections, will list down different restaurants that are similar.
 The Information that is available are as such:
