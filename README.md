@@ -1,26 +1,26 @@
 # Cuisine Galore
 
-This app allows the users to select between searching a restaurant by name and city or discovering different restaurants by specifing a city. 
+This app allows the users to select between searching a restaurant by name and city or discovering different restaurants by specifying a city. 
 
-## Searching restaurants by name and city
+### Searching restaurants by name and city
 The user enters a restaurants name and city name and lists down different restaurants with different information about it.
   1.pictures
   2.cusine type
   3.address
   4.features
   5.opening and closing times
-## Discover
-![Image description](assets/assets/IMG_0216_Edited)_(2).jpg)
-The user enters a city name and lists down different collection of cuisins and activities. 
-Selecting thoses collections, will list down different restaurants that are similar.
-The Infomation that is avaliable are as such:
+### Discover
+![Image description](screenshots/Capture2.jpg)
+The user enters a city name and lists down different collection of cuisine and activities. 
+Selecting those collections, will list down different restaurants that are similar.
+The Information that is available are as such:
   1.pictures
-  2.cusine type
+  2.cuisine type
   3.address
   4.features
   5.opening and closing times
   
-  Note: To return to the home page a user only has to click on the cuisin galore title 
+  Note: To return to the home page a user only has to click on the cuisine galore title 
 
 
 Live : 
