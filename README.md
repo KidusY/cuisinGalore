@@ -10,6 +10,7 @@ The user enters a restaurants name and city name and lists down different restau
   4.features
   5.opening and closing times
 ## Discover
+![Image description](assets/assets/IMG_0216_Edited)_(2).jpg)
 The user enters a city name and lists down different collection of cuisins and activities. 
 Selecting thoses collections, will list down different restaurants that are similar.
 The Infomation that is avaliable are as such:
