@@ -10,7 +10,7 @@ The user enters a restaurants name and city name and lists down different restau
   4.features
   5.opening and closing times
 ### Discover
-![Image description](screenshots/Capture2.jpg)
+![Image description](https://github.com/KidusY/cuisinGalore/blob/master/screenshots/Capture1.JPG)
 The user enters a city name and lists down different collection of cuisine and activities. 
 Selecting those collections, will list down different restaurants that are similar.
 The Information that is available are as such:
