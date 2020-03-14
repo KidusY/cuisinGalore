@@ -22,14 +22,14 @@ The Information that is available are as such:
   features,
   opening and closing times
   
-  Note: To return to the home page a user only has to click on the cuisine galore title 
+  #### Note: To return to the home page a user only has to click on the cuisine galore title 
 
 
 Live : 
 https://kidusy.github.io/capStone/
 
-Screenshots :
-https://gist.github.com/tyonek/74575e7109b610d42bf546cdcd30e2f9
+Github:
+https://github.com/KidusY/cuisinGalore.git
 
 The app was built using
 Zomata API,
