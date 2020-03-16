@@ -26,7 +26,7 @@ The Information that is available are as such:
 
 
 Live : 
-https://kidusy.github.io/capStone/
+https://kidusy.github.io/cuisinGalore/
 
 Github:
 https://github.com/KidusY/cuisinGalore.git
